@@ -1,0 +1,39 @@
+﻿version: "3.2"
+
+networks:
+   front-tier:
+   back-tier:
+
+services:
+   moviesapi:
+      build:
+         context: .
+         dockerfile: Dockerfile
+      environment:
+         - DatabaseServer=mssqlserver
+         - DatabaseName=MoviesDb
+         - DatabaseUser=sa
+         - DatabasePassword=Docker@1
+      container_name: moviesapicontainer
+      ports:
+         - "5000:80"
+      networks:
+         - back-tier
+         - front-tier
+      depends_on:
+         - mssqlserver
+         
+   mssqlserver:
+      image: "microsoft/mssql-server-linux:latest"
+      ports:
+         - "1445:1433"
+
+      container_name: moviessqlcontainer
+      environment:
+         - ACCEPT_EULA=Y
+         - SA_PASSWORD=Docker@1
+      networks:
+         - back-tier
+
+      
+
