@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MoviesDockerDemo.Models;
 
 namespace MoviesDockerDemo.Data
@@ -11,7 +7,7 @@ namespace MoviesDockerDemo.Data
     {
         public MovieContext(DbContextOptions<MovieContext> options) :base(options)
         {
-            
+            Database.EnsureCreated();
         }
 
         public DbSet<Movie> Movies { get; set; }

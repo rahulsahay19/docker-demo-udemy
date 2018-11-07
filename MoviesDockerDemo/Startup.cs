@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using MoviesDockerDemo.Data;
 
 namespace MoviesDockerDemo
@@ -33,7 +26,7 @@ namespace MoviesDockerDemo
             var user = Configuration["DatabaseUser"];
             var password = Configuration["DatabaseUserPassword"];
             var connectionString = $"Server={server};Database={database};User={user};Password={password};";
-
+            
             // services.AddDbContext<MovieContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
             services.AddDbContext<MovieContext>(options => options.UseSqlServer(connectionString));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
